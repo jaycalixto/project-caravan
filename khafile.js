@@ -1,4 +1,4 @@
-let project = new Project('New Project');
+let project = new Project('Project caravan');
 project.addAssets('Assets/**');
 project.addSources('Sources');
 resolve(project);
