@@ -6,6 +6,7 @@ import kha.System;
 import kha.Color;
 import kha.Image;
 import kha.Scaler;
+import utils.Window;
 
 class Caravan {
 
@@ -15,8 +16,11 @@ class Caravan {
 	private static var bgColor = Color.fromValue(0xAA00FF);
 	
 	private var backbuffer: Image;
+	//hold a window reference for treating resize events
+	private var windowCanvas:Window;
 
-	public function new() {
+	public function new(windowUtils:Window) {
+		this.windowCanvas = windowUtils;
 		
 		System.notifyOnRender(render);
 		Scheduler.addTimeTask(update, 0, 1 / 60);

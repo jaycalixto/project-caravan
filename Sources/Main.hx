@@ -1,45 +1,24 @@
 package;
 
 import kha.System;
-import js.Browser;
-import js.html.CanvasElement;
+import utils.Window;
 
 class Main {
 	public static function main() {
 
-		resizeCanvas();
-
-		// var windowWidth = System.windowWidth();
-		// var windowHeight = System.windowHeight();
+		var windowUtils = new Window();
 
 		System.init(
 			{
 				title: "Project", 
 				// width: Caravan.gameWidth, 
 				// height: Caravan.gameHeight
-				width: windowWidth, 
-				height: windowHeight
+				width: windowUtils.windowWidth, 
+				height: windowUtils.windowHeight
 			}, 
 			function () {
-				new Caravan();
+				new Caravan(windowUtils);
 			}
 		);
-	}
-
-	public static var windowWidth:Int;
-	public static var windowHeight:Int;
-
-	public static function resizeCanvas(){
-		#if js
-
-		var c:CanvasElement = cast Browser.document.getElementById("khanvas");
-
-		windowWidth = Std.int(Browser.window.innerWidth * 0.95);
-		windowHeight = Std.int(Browser.window.innerHeight * 0.95);
-
-		c.width = windowWidth;
-		c.height = windowHeight;
-
-		#end
 	}
 }
