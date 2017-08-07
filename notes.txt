@@ -1,2 +1,5 @@
 sailor moon sprites
 http://tsgk.captainn.net/?p=showgame&t=sy&sy=8&ga=326
+
+kha game jam
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/triplefox/khaguide/master/build/book.html#updating-kha-standalone
