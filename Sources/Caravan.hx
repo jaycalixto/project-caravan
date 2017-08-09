@@ -20,10 +20,13 @@ class Caravan {
 	private var windowCanvas:Window;
 
 	public function new(windowUtils:Window) {
-		this.windowCanvas = windowUtils;
+		windowCanvas = windowUtils;
 		
 		System.notifyOnRender(render);
+		//System.changeResolution() figure this later
 		Scheduler.addTimeTask(update, 0, 1 / 60);
+
+		windowCanvas.forceIntegerResolution(gameWidth, gameHeight);
 
 		backbuffer = Image.createRenderTarget(gameWidth, gameHeight);
 	}
