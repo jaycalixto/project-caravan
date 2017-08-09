@@ -1,7 +1,7 @@
 package;
 
 import kha.System;
-import utils.Window;
+import mankha.utils.Window;
 
 class Main {
 	public static function main() {

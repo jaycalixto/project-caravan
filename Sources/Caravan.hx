@@ -6,7 +6,7 @@ import kha.System;
 import kha.Color;
 import kha.Image;
 import kha.Scaler;
-import utils.Window;
+import mankha.utils.Window;
 
 class Caravan {
 
