@@ -6,18 +6,16 @@ import mankha.utils.Window;
 class Main {
 	public static function main() {
 
-		var windowUtils = new Window();
+		var w = new Window(Caravan.gameWidth, Caravan.gameHeight);
 
 		System.init(
 			{
 				title: "Project", 
-				// width: Caravan.gameWidth, 
-				// height: Caravan.gameHeight
-				width: windowUtils.windowWidth, 
-				height: windowUtils.windowHeight
+				width: w.windowWidth, 
+				height: w.windowHeight
 			}, 
 			function () {
-				new Caravan(windowUtils);
+				new Caravan(w);
 			}
 		);
 	}

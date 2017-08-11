@@ -6,6 +6,8 @@ import kha.System;
 import kha.Color;
 import kha.Image;
 import kha.Scaler;
+import kha.Assets;
+import mankha.gfx.AnimatedSprite;
 import mankha.utils.Window;
 
 class Caravan {
@@ -13,22 +15,30 @@ class Caravan {
 	public static var gameWidth = 640;
 	public static var gameHeight = 360;
 
-	private static var bgColor = Color.fromValue(0xAA00FF);
+	private static var bgColor = Color.fromValue(0x0A0A0F);
 	
 	private var backbuffer: Image;
 	//hold a window reference for treating resize events
 	private var windowCanvas:Window;
 
-	public function new(windowUtils:Window) {
-		windowCanvas = windowUtils;
+	private var spr: AnimatedSprite;
+
+	public function new(w:Window) {
+		windowCanvas = w;
+		//windowCanvas.forceIntegerResolution(gameWidth, gameHeight);
 		
 		System.notifyOnRender(render);
-		//System.changeResolution() figure this later
+		
+		trace("w: " + windowCanvas.windowWidth + " h: " + windowCanvas.windowHeight);
+		//System.changeResolution(windowCanvas.windowWidth, windowCanvas.windowHeight);
+
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 
-		windowCanvas.forceIntegerResolution(gameWidth, gameHeight);
-
 		backbuffer = Image.createRenderTarget(gameWidth, gameHeight);
+
+		Assets.loadImageFromPath("char1.png", true, function(image) {
+			spr = new AnimatedSprite(image, 24, 38);
+		});
 	}
 
 	function update(): Void {
@@ -37,10 +47,16 @@ class Caravan {
 
 	function render(framebuffer: Framebuffer): Void {		
 		backbuffer.g2.begin(bgColor);
+		if(spr != null) {
+			//backbuffer.g2.drawImage(img, 0, 0);
+			spr.draw(backbuffer.g2);
+		}
 		backbuffer.g2.end();
 
 		framebuffer.g2.begin();
 		Scaler.scale(backbuffer, framebuffer, System.screenRotation);
 		framebuffer.g2.end();
+
+		//trace("fb w: "+ framebuffer.width+ " fb h: " + framebuffer.height);
 	}
 }
