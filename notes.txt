@@ -1,3 +1,8 @@
+interesting links
+https://github.com/r3d9u11/haxe-basics/tree/master/9_AdditionalLibraries/9.3_GraphicMediaEngines/9.3.2_Kha#contain
+http://forum.kode.tech/category/2/kha
+http://www.realmofdarkness.net/dq/games/gbc/dw3/maps/town
+
 sailor moon sprites
 http://tsgk.captainn.net/?p=showgame&t=sy&sy=8&ga=326
 
