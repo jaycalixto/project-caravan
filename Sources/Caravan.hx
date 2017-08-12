@@ -12,8 +12,9 @@ import mankha.utils.Window;
 
 class Caravan {
 
-	public static var gameWidth = 640;
-	public static var gameHeight = 360;
+	//Shift to square resolution
+	public static var gameWidth = 256;
+	public static var gameHeight = 256;
 
 	private static var bgColor = Color.fromValue(0x0A0A0F);
 	
