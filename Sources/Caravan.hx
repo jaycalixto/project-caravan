@@ -8,6 +8,7 @@ import kha.Image;
 import kha.Scaler;
 import kha.Assets;
 import mankha.gfx.AnimatedSprite;
+import mankha.utils.Rectangle;
 import mankha.utils.Window;
 import mankha.input.InputHandler;
 
@@ -17,7 +18,7 @@ class Caravan {
 	public static var gameWidth = 320;
 	public static var gameHeight = 192;
 
-	private static var bgColor = Color.fromValue(0x0A0A0F);
+	private static var bgColor = Color.Black;
 	
 	private var backbuffer: Image;
 	//hold a window reference for treating resize events
@@ -25,6 +26,8 @@ class Caravan {
 
 	private var spr: AnimatedSprite;
 	private var inputHandler: InputHandler;
+
+	private var allSprites: Image;
 
 	public function new(w:Window) {
 		windowCanvas = w;
@@ -35,8 +38,36 @@ class Caravan {
 
 		backbuffer = Image.createRenderTarget(gameWidth, gameHeight);
 
-		Assets.loadImageFromPath("char1.png", true, function(image) {
-			spr = new AnimatedSprite(image, 24, 38);
+		Assets.loadImageFromPath("sprites.png", true, function(image) {
+			allSprites = image;
+
+			var sprSize = 16;
+
+			spr = new AnimatedSprite(image, sprSize, sprSize);
+			spr.framesUp = [
+					new Rectangle(0, sprSize, sprSize, sprSize),
+					new Rectangle(sprSize, sprSize, sprSize, sprSize),
+					new Rectangle(0, sprSize, sprSize, sprSize),
+					new Rectangle(sprSize * 2, sprSize, sprSize, sprSize)
+				];
+			spr.framesDown = [
+					new Rectangle(0, 0, sprSize, sprSize),
+					new Rectangle(sprSize, 0, sprSize, sprSize),
+					new Rectangle(0, 0, sprSize, sprSize),
+					new Rectangle(sprSize * 2, 0, sprSize, sprSize)
+				];
+			spr.framesLeft = [
+					new Rectangle(0, sprSize * 2, sprSize, sprSize),
+					new Rectangle(sprSize, sprSize * 2, sprSize, sprSize),
+					new Rectangle(0, sprSize * 2, sprSize, sprSize),
+					new Rectangle(sprSize * 2, sprSize * 2, sprSize, sprSize)
+				];
+			spr.framesRight = [
+					new Rectangle(0, sprSize * 2, sprSize, sprSize),
+					new Rectangle(sprSize, sprSize * 2, sprSize, sprSize),
+					new Rectangle(0, sprSize * 2, sprSize, sprSize),
+					new Rectangle(sprSize * 2, sprSize * 2, sprSize, sprSize)
+				];
 		});
 
 		inputHandler = new InputHandler();
@@ -52,14 +83,18 @@ class Caravan {
 
 			if (inputHandler.up) {
 				spr.position.y -= 1;
+				spr.changeDirection(Direction.UP);
 			} else if (inputHandler.down) {
 				spr.position.y += 1;
+				spr.changeDirection(Direction.DOWN);
 			}
 
 			if(inputHandler.left) {
 				spr.position.x -= 1;
+				spr.changeDirection(Direction.LEFT);
 			} else if (inputHandler.right) {
 				spr.position.x += 1;
+				spr.changeDirection(Direction.RIGHT);
 			}
 
 			if (spr.position.x < 0) {
